@@ -277,45 +277,44 @@ describe('China UnionPay', function(){
 
 describe('Switch', function(){
   var expect = chai.expect;
-  
-  for(var prefix = 4903; prefix <= 4936; prefix++){
+  var arrayOfNumbers4 = [4903, 4905, 4911, 4936, 6333, 6759];
+  var arrayOfNumbers6 = [564182, 633110];
+
+  for(var prefix = 0; prefix < arrayOfNumbers4.length; prefix++){
     (function(prefix){
-      if((prefix === 4903) || (prefix === 4905) || (prefix === 4911) || (prefix === 4936)){
-        var stringPrefixIndex = String(prefix);
-        for(var length = 16; length <= 19; length++){
-          if(length === 17){
-            continue;
-	  }else{  
-            var extraLength = '';
-            var stringLength = String(length); 
-            (function(length){
-              it('has a prefix of ' + stringPrefixIndex + ' and has a length of ' + stringLength, function(){
-                expect(detectNetwork(stringPrefixIndex + '123456789012' + extraLength)).to.equal('Switch');
-                extraLength += '1';
-              });
-            })(length);  
-          }
-        }
-      }
+      var stringPrefix = String(arrayOfNumbers4[prefix]);
+      it('has a prefix of ' + stringPrefix + ' and a length of 16', function(){
+        expect(detectNetwork(stringPrefix + '123456789012')).to.equal('Switch');
+      });
+
+      it('has a prefix of ' + stringPrefix + ' and a length of 18', function(){
+        expect(detectNetwork(stringPrefix + '12345678901234')).to.equal('Switch');
+      });
+
+      it('has a prefix of ' + stringPrefix + ' and a length of 19', function(){
+        expect(detectNetwork(stringPrefix + '123456789012345')).to.equal('Switch');
+      });
     })(prefix);
   }
 
-  for(var length = 16; length <= 19; length++){
-    if(length === 17){
-      continue;
-    }
-    var extraLength = '';
-    var stringLength = String(length);
-    (function(length){  
-      it('has a prefix of 6333 and has a length of ' + stringLength, function(){
-        expect(detectNetwork('6333123456789012' + extraLength)).to.equal('Switch');
-        extraLength += '1';
+  for(var prefix = 0; prefix < arrayOfNumbers6.length; prefix++){
+    (function(prefix){
+      var stringPrefix = String(arrayOfNumbers6[prefix]);
+     
+      it('has a prefix of ' + stringPrefix + ' and a length of 16', function(){
+        expect(detectNetwork(stringPrefix + '1234567890')).to.equal('Switch');
       });
-    })(length);
-  }
 
+      it('has a prefix of ' + stringPrefix + ' and a length of 18', function(){
+        expect(detectNetwork(stringPrefix + '123456789012')).to.equal('Switch');
+      });
 
+      it('has a prefix of ' + stringPrefix + ' and a length of 19', function(){
+        expect(detectNetwork(stringPrefix + '1234567890123')).to.equal('Switch');
+      });
+    })(prefix); 
+  }	  
+});	  
 
-});
 
 
