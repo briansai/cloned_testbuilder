@@ -23,7 +23,7 @@ var detectNetwork = function(cardNumber) {
     return 'Diner\'s Club';
   }else if(cardLength === 15 && prefix2 === '34' || cardLength === 15 && prefix2 === '37'){
     return 'American Express';
-  }else if((range(4903, 4936, prefix4) && range(16, 19, cardLength)) || (prefix4 === '6333' && range(16, 19, cardLength)) || (prefix4 === '6759' && range(16, 19, cardLength))){
+  }else if((range(4903, 4936, prefix4) && range(16, 19, cardLength)) || (prefix4 === '6333' && range(16, 19, cardLength)) || (prefix4 === '6759' && range(16, 19, cardLength)) || (prefix6 === '564182' && range(16, 19, cardLength)) || (prefix6 === '633110' && range(16, 19, cardLength))){
     return 'Switch';
   }else if((cardLength === 13 || 16 || 19) && prefix1 === '4' && !arraySwitch(prefix4)){
     return 'Visa';
